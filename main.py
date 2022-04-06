@@ -16,7 +16,6 @@ for nDim in [3]:
     for svr in ['2.2']:
         os.chdir(svr)
         uList, sList, V = readIn.readIn1(os.getcwd(), nDim, svr)
-
         sList = np.sqrt(sList)
         u = uList[0] * np.sqrt(sList[0])
         u = u - np.min(u, axis=0)
@@ -24,12 +23,12 @@ for nDim in [3]:
         for i in range(1, nDim-1):
             u2 = uList[i] * np.sqrt(sList[i])
             u2 = u2 - np.min(u2, axis=0)
-            alphaL = len(sList[i-1])
-            alphaR = len(sList[i])
             for j in range(np.shape(u2)[1]):
+                u_tmp = np.reshape(u2[:, j], (len(u), np.shape(u)[1]))
+                print(np.shape(u_tmp))
                 for k in range(np.shape(V)[0]):
-                    #u_tmp = np.reshape(u2[:, j], (alphaL, len(u)))
                     print(i, j, k)#, u_tmp)
+                    print(np.shape(u2[:, j]))
         ##    plotevecs.plotevecs(range(1, len(u) + 1), u*627.503, i-1, ndim, numsvecs)
         ##
         ##print('Inside dimension', nDim, 'for', nDim, 'dimensional case with svr =', svr)
