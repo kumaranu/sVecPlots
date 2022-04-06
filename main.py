@@ -16,27 +16,16 @@ for nDim in [3]:
     for svr in ['2.2']:
         os.chdir(svr)
         uList, sList, V = readIn.readIn1(os.getcwd(), nDim, svr)
-        # print([np.shape(i) for i in uList])
-        # print(sList)
-        # print(np.shape(V))
 
         sList = np.sqrt(sList)
         u = uList[0] * np.sqrt(sList[0])
         u = u - np.min(u, axis=0)
-        # print('Shape of U matrix along first dimension:', np.shape(u))
         plotEvecs.plotEvecs(range(1, len(u) + 1), u*627.503, 1, nDim, numSvecs)
         for i in range(1, nDim-1):
             u2 = uList[i] * np.sqrt(sList[i])
             u2 = u2 - np.min(u2, axis=0)
-            # print('Shape of U matrix along second dimension', np.shape(u2))
             alphaL = len(sList[i-1])
-            # print('No. of left singular values:', alphaL)
-            # print('Sqrt of left singular values:', sList[i-1])
             alphaR = len(sList[i])
-            # print('No. of right singular values:', alphaR)
-            # print('Sqrt of right singular values:', sList[i])
-            # print('len(u):', len(u))
-            # print('len(u2):', len(u2))
             for j in range(np.shape(u2)[1]):
                 for k in range(np.shape(V)[0]):
                     #u_tmp = np.reshape(u2[:, j], (alphaL, len(u)))
@@ -49,8 +38,6 @@ for nDim in [3]:
         ##for j in range(numSvecs):
         ##    plotEvecs.plotEvecs(range(1, len(V) + 1), V*627.503, nDim, nDim, numSvecs)
         os.chdir('../')
-
-    #os.chdir('../')
     os.chdir('../')
 os.chdir('sVecPlots')
 
